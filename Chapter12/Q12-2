@@ -1,0 +1,51 @@
+-- 順番は複合キーが不必要なものから作り始める。
+CREATE TABLE department(
+    department_nunber 
+        CHAR(3)                 --主キーで大企業想定の３桁
+            PRIMARY KEY,
+    department_name             --余裕を持った30文字,必須で一意
+        VARCHAR (30) 
+            NOT NULL 
+            UNIQUE
+);
+
+CREATE TABLE post(
+    post_code                   --主キーで部署は２桁
+        CHAR(2) 
+            PRIMARY KEY,     
+    post_name                   --20文字,必須で一意
+        VARCHAR (20) 
+            NOT NULL 
+            UNIQUE
+);
+
+CREATE TABLE employee(
+    employee_number             --規則性を持った命名ができる9桁で主キー
+        CHAR(9) 
+            PRIMARY KEY,
+    employee_name               --20文字で必須
+        VARCHAR (20) 
+            NOT NULL, 
+    post_code                   --外部キー,2桁で必須
+        CHAR(2)  
+            NOT NULL 
+            REFERENCES post(post_code),
+    age INTEGER                 --年齢がマイナスいかないようにチェックするためINT,必須
+            NOT NULL
+            CHECK(
+                age >= 0
+            )
+);
+
+CREATE TABLE club_menber(
+    department_nunber          --外部キー,3桁で必須
+        CHAR(3)  
+            NOT NULL 
+            REFERENCES department(department_nunber),
+    employee_number 
+        CHAR(11)                --外部キー１１桁で必須
+            NOT NULL
+            REFERENCES employee(employee_number),
+            PRIMARY KEY (department_nunber, employee_number)    --複合キー
+);
+
