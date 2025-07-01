@@ -23,7 +23,7 @@ SELECT 支店ID AS 支店コード, B.名前 AS 支店名, C.名前 AS 支店長
     FROM 社員 AS C
     JOIN 支店 AS B
     ON C.上司ID = B.支店長ID
-    JOIN (SELECT COUNT(出勤地ID) AS 社員数, 出勤地ID
+    JOIN (SELECT COUNT(勤務地ID) AS 社員数, 勤務地ID
             FROM 社員 
             GROUP BY 出勤地ID 
     ) AS E
