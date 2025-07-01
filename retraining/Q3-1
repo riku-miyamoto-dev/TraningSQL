@@ -1,0 +1,41 @@
+--2
+SELECT 
+    *
+    FROM    
+        気象観測
+    WHERE
+        月 != 6
+
+-- 3
+SELECT
+    *
+    FROM
+        気象観測    
+    WHERE
+        降水量 < 100
+
+-- 5
+SELECT
+    *
+    FROM
+        気象観測    
+    WHERE
+        最高気温 >= 30
+
+-- 7
+SELECT
+    *
+    FROM
+        気象観測    
+     WHERE
+        月 IN (3, 5, 7)
+
+-- 11
+SELECT
+    *
+    FROM
+        気象観測    
+    WHERE
+        湿度 >= 60
+        AND
+        湿度 <= 79

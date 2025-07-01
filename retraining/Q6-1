@@ -1,0 +1,29 @@
+1--
+SELECT 
+    SUM(降水量) AS 年間降水量 
+    AVG(最高気温) AS 年間最高気温平均 
+    AVG(最低気温) AS 年間最低気温平均
+FROM 
+    都市別気象観測観測
+
+-- 3
+SELECT  
+    都市名, 
+    AVG(降水量),
+    MIN(最高気温), 
+    MAX(最低気温)
+FROM
+    都市別気象観測観測
+    GROUP BY 
+        都市名
+
+-- 5
+SELECT
+    都市名,
+    気温
+FROM
+    都市別気象観測観測
+GROUP BY 
+    都市名
+HAVING
+    MAX(最高気温) >= 38
