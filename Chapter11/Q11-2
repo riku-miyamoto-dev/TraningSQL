@@ -1,0 +1,25 @@
+-- 1
+名前
+血液型
+
+-- 2
+CREATE VIEW name_faculty AS
+    SELECT 
+        B.名前 AS 学部名, 
+        C.学籍番号, 
+        C.名前, 
+        C.生年月日, 
+        C.血液型
+        FROM 
+            学生 AS C
+        JOIN
+            学部 AS B
+        ON
+            C.学部ID = B.学部ID
+
+-- 3
+INSERT INTO 学生
+    (学籍番号, 名前, 生年月日, 血液型, 学部ID, 登録順)
+VALUES
+    ('B1101022', '古島 進', '2004-02-12', 'A', 'K', (SELECT NEXTVAL('ISTD'))
+        )
