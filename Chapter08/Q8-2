@@ -1,0 +1,41 @@
+-- 1
+SELECT 社員番号, C.名前 AS 名前, D.名前 AS 部署名
+    FROM 社員 AS C
+    JOIN 部署 AS D
+    ON C.部署ID = D.部署ID
+
+-- 2
+SELECT C.社員番号, C.名前 AS 名前, D.名前 AS 上司名
+    FROM 社員 AS C
+    LEFT JOIN 社員 AS D
+    ON C.上司ID = D.社員ID
+
+-- 3
+SELECT 社員番号, C.名前 AS 名前, D.名前 AS 部署名, A.名前 AS 勤務地
+    FROM 社員 AS C
+    JOIN 部署 AS D
+    ON C.部署ID = D.部署ID
+    JOIN 支店 AS A
+    ON C.勤務地ID = A.支店ID
+
+-- 4
+SELECT 支店ID AS 支店コード, B.名前 AS 支店名, C.名前 AS 支店長名, E.社員数
+    FROM 社員 AS C
+    JOIN 支店 AS B
+    ON C.上司ID = B.支店長ID
+    JOIN (SELECT COUNT(勤務地ID) AS 社員数, 勤務地ID
+            FROM 社員 
+            GROUP BY 出勤地ID 
+    ) AS E
+    ON C.支店ID = E.勤務地ID
+
+-- 5
+SELECT 社員番号, C.名前 AS 名前, B1.名前 AS 本人勤務地, B2.名前 AS 上司勤務地
+    FROM 社員 AS C1
+    JOIN 社員 AS C2
+    ON C1.上司ID =C2.社員番号
+    AND C1.勤務地ID != C2.勤務地ID
+    JOIN 支店 AS B1
+    ON C1.勤務地ID = B1.支店ID
+    JOIN 支店 AS B2
+    ON C2.勤務地ID = B2.支店ID
